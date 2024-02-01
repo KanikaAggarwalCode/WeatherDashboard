@@ -5,3 +5,22 @@ h1{
     text-align: center;
     padding-top: 25px;
 }
+
+h2 {
+    font-size: 45px; 
+}
+
+#today {
+    font-size: 25px;
+    border-radius: 20px;
+    border-color: pink;
+}
+
+#today p {
+    font-size: 15px;
+}
+
+.form-input{
+padding: 5px;
+margin-bottom: 10px;
+}

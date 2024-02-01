@@ -43,7 +43,7 @@ function fiveDayForecast(lat,lon,APIKey) {
 
 // Here we are extractig the current weather data for the city entered by the user
 function currentWeatherData(data) {
-  $("#today").text(data.city.name + " (" + moment().format('M/D/YYYY') + ")");
+  $("#today").text(data.city.name + " (" + moment().format('MM/DD/YYYY') + ")");
   var currentTemp = data.list[0].main.temp;
   var currentWind = data.list[0].wind.speed;
   var currentHumidity = data.list[0].main.humidity
