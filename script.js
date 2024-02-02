@@ -35,7 +35,17 @@ function fiveDayForecast(lat,lon,APIKey) {
   })
   .then(function (data) {
     console.log(data);
-   
+
+//adding forecast date in forecast weather
+
+for (let i = 1; i < 6; i++) 
+{
+  let forecastDate = $(`.forecastDate-${i}`);
+  // console.log(forecastDate);
+  forecastDate.text(data.list[i].dt);
+}
+
+
     currentWeatherData(data);
 
   });
@@ -47,8 +57,12 @@ function currentWeatherData(data) {
   var currentTemp = data.list[0].main.temp;
   var currentWind = data.list[0].wind.speed;
   var currentHumidity = data.list[0].main.humidity
-  $("#today").append("<p>" + currentTemp + "</p>");
-  $("#today").append("<p>" + currentWind + "</p>");
-  $("#today").append("<p>" + currentHumidity + "</p>");
+  $("#today").append("<p>" + "</p>");
+  $("#today").append("<p>" + "Temp :  " + currentTemp + " 'C" + "</p>" );
+  $("#today").append("<p>" + "Wind :  " + currentWind + " KPH" + "</p>");
+  $("#today").append("<p>" + "Humidity :  " + currentHumidity + " %" + "</p>");
 
 }
+
+var h5Text = $('.weather-card-1').find('.card-title').text();
+    console.log(h5Text); 
