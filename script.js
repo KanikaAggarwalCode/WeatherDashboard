@@ -21,7 +21,10 @@ $("#search-button").on("click", function (cityToSearch) {
     var lat = data.coord.lat;
     var lon = data.coord.lon;
 
+   
+   
    fiveDayForecast(lat,lon,APIKey);
+   currentWeatherData(data); 
   });
 }
   
@@ -38,31 +41,47 @@ function fiveDayForecast(lat,lon,APIKey) {
 
 //adding forecast date in forecast weather
 
-for (let i = 1; i < 6; i++) 
-{
-  let forecastDate = $(`.forecastDate-${i}`);
-  // console.log(forecastDate);
-  forecastDate.text(data.list[i].dt);
-}
+    for (let i = 1, j=0; i < 5,j < 33; i = i + 1, j= j+8) 
+    {
+console.log(i);
+      let forecastDate = $(`.forecastDate-${i}`);
+      var datePart = data.list[j].dt_txt.split(" ")[0];
+      forecastDate.text(datePart);
+   
+      let forecastTemp = $(`.forecastTemp-${i}`);
+      forecastTemp.text("Temp :  " + data.list[j].main.temp + " 'C");
 
+      let forecastWind = $(`.forecastWind-${i}`);
+      forecastWind.text("Wind :  " + data.list[j].wind.speed + " KPH");
 
-    currentWeatherData(data);
+      let forecastHumidity = $(`.forecastHumidity-${i}`);
+      forecastHumidity.text("Humidity :  " + data.list[j].main.humidity + " %");
+
+    }
+
 
   });
 }
 
 // Here we are extractig the current weather data for the city entered by the user
 function currentWeatherData(data) {
-  $("#today").text(data.city.name + " (" + moment().format('MM/DD/YYYY') + ")");
-  var currentTemp = data.list[0].main.temp;
-  var currentWind = data.list[0].wind.speed;
-  var currentHumidity = data.list[0].main.humidity
-  $("#today").append("<p>" + "</p>");
+
+const iconCode = data.weather[0].icon;
+console.log(iconCode); 
+// / Extract the icon code from the API response
+const iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
+
+console.log(iconUrl);
+$('#weatherIcon').attr('src', iconUrl);
+
+
+  $("#today").text(data.name + " (" + moment().format('MM/DD/YYYY') + ")");
+  var currentTemp = data.main.temp;
+  var currentWind = data.wind.speed;
+  var currentHumidity = data.main.humidity
   $("#today").append("<p>" + "Temp :  " + currentTemp + " 'C" + "</p>" );
   $("#today").append("<p>" + "Wind :  " + currentWind + " KPH" + "</p>");
   $("#today").append("<p>" + "Humidity :  " + currentHumidity + " %" + "</p>");
 
 }
 
-var h5Text = $('.weather-card-1').find('.card-title').text();
-    console.log(h5Text); 
