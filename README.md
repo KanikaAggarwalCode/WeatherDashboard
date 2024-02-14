@@ -14,4 +14,4 @@ The final website with a random generated password looks like below
 **Contributions**
 - Weather Dashboard Project developed by Kanika Aggarwal
 
-To visit my site just visit https://kanikaaggarwalcode.github.io/PasswordGeneratorProject/
+To visit my site just visit https://kanikaaggarwalcode.github.io/WeatherDashboard/
