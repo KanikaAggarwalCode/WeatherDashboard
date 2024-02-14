@@ -1,10 +1,19 @@
 // This is our API key
 var APIKey = "29e6817d7796a0db3136cccecebc01d6";
+var searchHistory = [];
+
+$(document).ready(function() {
+  displaySearchHistory();
+});
 
 // Here we are listening for the click on the submit button
 $("#search-button").on("click", function (cityToSearch) {
   cityToSearch.preventDefault();
   var cityname = $('#search-input').val();
+  var displayVisibility = $('#displayVisibility');
+  displayVisibility.removeClass('hidden');
+  
+  saveToLocalStorage(cityname);
   searchCity(cityname,APIKey);
     })
 
@@ -21,8 +30,6 @@ $("#search-button").on("click", function (cityToSearch) {
     var lat = data.coord.lat;
     var lon = data.coord.lon;
 
-   
-   
    fiveDayForecast(lat,lon,APIKey);
    currentWeatherData(data); 
   });
@@ -54,7 +61,7 @@ function fiveDayForecast(lat,lon,APIKey) {
       $(`.forecastDate-${i}`).append("<img" + " src= '" + iconUrl + "'"+ " alt= 'test'>" + "<img>");
    
       let forecastTemp = $(`.forecastTemp-${i}`);
-      forecastTemp.text("Temp :  " + data.list[j].main.temp + " 'C");
+      forecastTemp.text("Temp :  " + data.list[j].main.temp + " 'K");
 
       let forecastWind = $(`.forecastWind-${i}`);
       forecastWind.text("Wind :  " + data.list[j].wind.speed + " KPH");
@@ -88,3 +95,18 @@ var iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
   
 }
 
+//save cityname to local storage
+function saveToLocalStorage(cityName) {
+
+  var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+  searchHistory.push(cityName);
+  localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+}
+
+//display previous searched city names
+function displaySearchHistory() {
+  var searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
+  searchHistory.forEach(function(cityName) {
+  $('.list-group').append(`<ul>${cityName}</ul>`);
+  });
+}

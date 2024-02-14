@@ -16,9 +16,9 @@ h2 {
   padding: 5px;
 }
 
-/* .hidden{
+.hidden{
   display: none;
-} */
+}
 
 #today p {
   font-size: 15px;
@@ -41,4 +41,17 @@ width: 300px;
   width: 300px;
   border-color: blue;
   background: linear-gradient(to right, rgb(141, 141, 236), rgb(83, 83, 177));
+}
+
+.list-group {
+  width: 300px;
+}
+
+.list-group ul {
+  width: 300px;
+  border-color: rgb(199, 196, 196);
+  background: rgb(199, 196, 196);
+  padding-bottom: 10px;
+  padding-left: 0px;
+  text-align: center;
 }
